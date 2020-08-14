@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project name="/home/gregor/www/laravel-crud/Laravel-CRUD.clpprj">
+ <settings>
+  <PM_URL><![CDATA[http://localhost:8000/]]></PM_URL>
+  <PM_HOME_URL><![CDATA[http://localhost:8000/]]></PM_HOME_URL>
+  <PM_LIBS><![CDATA[]]></PM_LIBS>
+ </settings>
+</project>
