@@ -1,20 +1,20 @@
 # Laravel Full Stack CRUD Coding Exercise
 
-## Features
+A Laravel application to manage organisation's users.
 
-A Laravel application to manage organisation's users:
+## Application Behaviour
 
 1. `EMPLOYEE` users see the Home page after logging in.
 1. `EMPLOYEE` users can see a Users data grid but have no editing rights.
-1. `ADMIN` users can register a new user and create a new `Organisation`.
 1. `ADMIN` users see a Users data grid after logging in, including `ADMIN` users.
 1. `ADMIN` users can create, edit, and delete users.
-1. Seeders to create organisations and users, including admin users.
+1. `ADMIN` users can create `ADMIN` users.
+1. `ADMIN` users cannot update or delete other `ADMIN` users.
+1. An `ADMIN` user cannot delete themself.
 1. An Organisations CRUD for `ADMIN` users.
-1. Tests for the users CRUD.
 1. Users search form
-1. A policy preventing `ADMIN` users from updating and deleting other `ADMIN` users.
-1. A policy preventing `ADMIN` users from deleting themself.
+1. Seeders to create organisations and users, including admin users.
+1. Tests for the users CRUD.
 
 ## Stack
 
@@ -24,7 +24,7 @@ A Laravel application to manage organisation's users:
 
 ## Setup the project
 
-This project has a `docker-compose.yml` which contains the basic stack setup to quickly spin up the local development environment.
+This project uses `Docker` containerisation so you can quickly run it in your local development environment.
 
 To set up the project follow these steps:
 
