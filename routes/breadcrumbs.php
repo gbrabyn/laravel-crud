@@ -16,13 +16,8 @@ Breadcrumbs::for('users.create', function ($trail) {
 
 Breadcrumbs::for('users.edit', function ($trail, $user) {
     $trail->parent('users');
-    $trail->push('Edit', route('users.edit', $user));
+    $trail->push('Edit '.$user->name, route('users.edit', $user));
 });
-
-
-
-
-
 
 Breadcrumbs::for('organisations', function ($trail) {
     $trail->parent('home');
@@ -36,5 +31,5 @@ Breadcrumbs::for('organisations.create', function ($trail) {
 
 Breadcrumbs::for('organisations.edit', function ($trail, $organisation) {
     $trail->parent('organisations');
-    $trail->push('Edit', route('organisations.edit', $organisation));
+    $trail->push('Edit '.$organisation->name, route('organisations.edit', $organisation));
 });

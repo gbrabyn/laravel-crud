@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
  *
  * @author G Brabyn
  */
-class UsersController extends Controller 
+class UsersController extends Controller
 {
 
     public function __construct()
@@ -24,7 +24,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $queryBuilder = UserFilters::apply($request);
-        
+
         return view('users.index', [
             'users' => $queryBuilder->orderBy('name')->paginate(50),
             'types' => $this->getTypes(),
@@ -41,10 +41,10 @@ class UsersController extends Controller
         foreach(Organisation::where([])->orderBy('name', 'asc')->get() AS $organisation){
             $ret[$organisation->id] = $organisation->name;
         }
-        
+
         return $ret;
     }
-    
+
     /**
      *  For populating <select> and <input type="radio"> options
      */
@@ -53,37 +53,37 @@ class UsersController extends Controller
         $types = array_combine(User::getTypes(), User::getTypes());
         $types[User::TYPE_EMPLOYEE] = 'Employee';
         $types[User::TYPE_ADMIN] = 'Administrator';
-        
+
         return $types;
     }
-    
+
     public function add()
     {
         $this->authorize('create', User::class);
-        
+
         return view('users.edit', [
             'types' => $this->getTypes(),
             'organisations' => $this->getOrganisations(),
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $this->authorize('create', User::class);
-        
-        $validatedData = $request->validate($this->getValidators());        
+
+        $validatedData = $request->validate($this->getValidators());
         $validatedData['password'] = $this->makePassword();
-        
+
         User::create($validatedData)->save();
 
         return redirect()->route('users');
     }
-    
+
     private function getValidators(?User $user=null) : array
     {
         $validOrganisations = ['', ...array_keys($this->getOrganisations())];
         $uniqueRule = $user ? Rule::unique('users')->ignore($user) : 'unique:users';
-        
+
         return [
             'name' => 'required|max:255',
             'email' => ['required', 'email', 'max:255', $uniqueRule],
@@ -98,36 +98,36 @@ class UsersController extends Controller
             ],
         ];
     }
-    
-    private function makePassword() : string  
+
+    private function makePassword() : string
     {
         $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890!$%^&!$%^&');
         $password = substr($random, 0, 10);
-        
+
         return Hash::make($password);
     }
-    
+
     public function edit(User $user)
     {
         $this->authorize('update', $user);
-        
+
         return view('users.edit', [
             'types' => $this->getTypes(),
             'organisations' => $this->getOrganisations(),
             'user' => $user,
         ]);
     }
-    
+
     public function update(Request $request, User $user)
     {
         $this->authorize('update', $user);
-        
+
         $validatedData = $request->validate($this->getValidators($user));
         $user->update($validatedData);
 
         return redirect()->route('users');
     }
-    
+
     public function delete(User $user)
     {
         $this->authorize('delete', $user);
