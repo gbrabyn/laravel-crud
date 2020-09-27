@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/tests/CodeCoverage
 .env
 .env.backup
 .phpunit.result.cache
