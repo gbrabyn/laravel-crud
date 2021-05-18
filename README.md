@@ -43,7 +43,7 @@ docker-compose up -d
 3. Install the dependencies
 
 ```bash
-docker-compose exec php composer install
+docker-compose exec app composer install
 
 npm install
 ```
@@ -57,13 +57,13 @@ npm run dev
 5. Create a key
 
 ```bash
-docker-compose exec php php artisan key:generate
+docker-compose exec app php artisan key:generate
 ```
 
 6. Run migrations
 
 ```bash
-docker-compose exec php php artisan migrate --seed
+docker-compose exec app php artisan migrate --seed
 ```
 
 7. View website
